@@ -1,0 +1,8 @@
+{
+  "dbUrl": "127.0.0.1",
+  "dbPort": "3306",
+  "dbName": "stfu",
+  "dbUser": "root",
+  "dbPassword": "rns59uwf",
+  "encryption": true
+}
