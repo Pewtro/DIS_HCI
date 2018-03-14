@@ -18,9 +18,9 @@ const SDK = {
             headers: headers,
             contentType: "application/json",
             dataType: "json",
-            data: JSON.stringify(SDK.Encryption.encrypt(JSON.stringify(options.data))),
+            data: JSON.stringify(SDK.Encryption.encrypt(JSON.stringify(options.data))), //JSON.stringify(options.data),
             success: (data, status, xhr) => {
-                callback(null, SDK.Encryption.decrypt(data), status, xhr);
+                callback(null, SDK.Encryption.decrypt(data)/*data*/, status, xhr);
             },
             error: (xhr, status, errorThrown) => {
                 callback({xhr: xhr, status: status, error: errorThrown});

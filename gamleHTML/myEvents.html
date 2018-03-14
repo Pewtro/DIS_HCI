@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <meta charset="UTF-8">
+    <title>My events - DØK Social</title>
+</head>
+<body>
+
+<!-- TODO: print alle events som er oprettet af den studerende der er logget ind, tilknyt knap til hver enkelt til at kunne opdatere og slette event, samt at få en liste med deltagende studerende-->
+
+<div class="container">
+    <div class="row" id="nav-container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="profile.html">DØK Social</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="newevent.html">New event</a></li>
+                    <li><a href="events.html">All events</a></li>
+                    <li><a href="#">My events</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <button style="margin-right: 20px; margin-top: 5px" class="btn btn-primary pull-right"
+                            id="logoutButton">Log Out
+                    </button>
+                </ul>
+            </div>
+        </nav>
+        <div id="overlay">
+            <div class="page-header">
+                <div class="text-center">
+                    <button id="turnOffOverlay" class="btn btn-success">Close</button>
+                </div>
+                <h3 align="center"><u>Event information</u>
+                </h3>
+                <table class="overlayTable">
+                    <thead>
+                    <th>Id</th>
+                    <th>Event name</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    </thead>
+                    <tbody id="attendingStudentsEventsOverlay">
+
+                    </tbody>
+                </table>
+                <h3 align="center"><u>Attending students</u></h3>
+                <table class="overlayTable">
+                    <thead>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    </thead>
+                    <tbody id="attendingStudentsOverlay">
+
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+
+        </div>
+        <div class="page-header">
+            <h2 align="center"><u>My events</u></h2>
+        </div>
+        <table class="table">
+            <thead class="thead">
+            <th>Id</th>
+            <th>Event name</th>
+            <th>Location</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+            <th>View attending</th>
+
+            <tbody id="myEventTable">
+
+            </tbody>
+        </table>
+
+        <br/><br/>
+    </div>
+</div>
+<footer class="card-footer">
+    <div class="container">
+        <p class="text-muted">2017 © All rights reserved - DØK Social</p>
+    </div>
+</footer>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/myEvents.js"></script>
+
+</body>
+</html>
+
+</body>
+</html>
