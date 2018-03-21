@@ -1,0 +1,29 @@
+.loginScreen {
+    text-align: center;
+    background-color: #1b4f72;
+    color: ghostwhite;
+}
+
+#thead {
+    text-align: center;
+}
+
+.kurv-img {
+    display: block;
+    max-width: 230px;
+    max-height: 95px;
+    width: auto;
+    height: auto;
+}
+
+#købKnap {
+    margin-top: 40px;
+    background-color: #1b6d85;
+    border-radius: 25px;
+}
+
+#removeKnap {
+    margin-top: 40px;
+    background-color: #1b6d85;
+    border-radius: 25px;
+}

@@ -1,6 +1,15 @@
-#loginButton {
-    margin-right: 20px;
+.loginScreen {
+    text-align: center;
+    background-color: #1b4f72;
+    color: ghostwhite;
 }
-#error {
-    color: red;
+
+.loginScreenFooter {
+    top: 90%;
+    position: fixed;
+    left: 80%;
+}
+
+.rfidIdHidden {
+    display: none;
 }

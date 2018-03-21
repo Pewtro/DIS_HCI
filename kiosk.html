@@ -1,40 +1,57 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <style>
-        .div1 {
-            width: 350px;
-            height: 70px;
-            padding: 10px;
-            border: 1px solid #aaaaaa;
-        }
-    </style>
-    <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            let data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
-        }
-    </script>
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/kiosk.css">
 </head>
-<body>
-
-<p>Drag the product into the associated box:</p>
-
-<div class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-<div class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-<div class="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<body class="loginScreen">
+<br/>
 <br>
-<img id="drag1" src="./images/regextesting.PNG" draggable="true" ondragstart="drag(event)" width="336" height="69">
-<img id="drag2" src="./images/oel.png" draggable="true" ondragstart="drag(event)" width="336" height="69">
+<h1>Tap image to purchase 1</h1>
+
+<div id="productsTable" class="col-md-8"></div>
+<br/>
+<div id="kurv" class="col-md-4">
+    <img src="images/kurv.png" width="50" height="50">
+    <table class="table">
+        <thead>
+        <th></th>
+        <th>Vare:</th>
+        <th>Antal:</th>
+        <th></th>
+        </thead>
+        <tbody id="kurvTabel">
+        <tr>
+            <td><img src="images/tuborg.png" height="640" width="205" class="kurv-img"></td>
+            <td>Tuborg</td>
+            <td>4</td>
+            <td>
+                <button id="removeKnap">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="images/sodavand.png" height="3933" width="1014" class="kurv-img"></td>
+            <td>Sodavand</td>
+            <td>4</td>
+            <td>
+                <button id="removeKnap">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="købKnap">Purchase</button>
+            </td>
+            <td></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/kiosk.js"></script>
 
 </body>
 </html>
