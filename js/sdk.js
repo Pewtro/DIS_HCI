@@ -49,23 +49,6 @@ const SDK = {
                     callback(null, data);
                 });
         },
-        //loads the current user by getting their profile with the token in session storage
-        loadCurrentStudent: (callback) => {
-            SDK.request({
-                method: "GET",
-                url: "/students/profile",
-            }, (err, student) => {
-                if (err) {
-                    debug && console.log("error i loadCurrentUser");
-                    return callback(err);
-                }
-                callback(null, student);
-                //sets the found student as our student in sessionStorage
-                sessionStorage.setItem("Student", student);
-
-            });
-        },
-
         //lets the user logout through the use of the token in sessionStorage
         logOut: (callback) => {
             SDK.request({
@@ -87,15 +70,30 @@ const SDK = {
 
     //Products
     Product: {
-        finalizePurchase: () => {
-
+        finalizePurchase: (product, amountBought, callback) => {
+            SDK.request({
+                method: "POST",
+                url: "/kiosk",
+                headers: {
+                    authorization: sessionStorage.getItem("User"),
+                },
+                data: {
+                    nameProduct: product,
+                    amountBought: amountBought,
+                }
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
         },
         loadAllActiveProducts: (callback) => {
             SDK.request({
                 method: "GET",
                 url: "/kiosk",
             }, (err, data) => {
-                if(err) {
+                if (err) {
                     return callback(err);
                 }
                 callback(null, data);

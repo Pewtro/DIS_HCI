@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/kiosk.css">
+</head>
+<body class="loginScreen">
+<br/>
+<br>
+<h1>Tap image to purchase 1</h1>
+
+<div id="productsTable" class="col-md-8"></div>
+<br/>
+<div id="kurv" class="col-md-4">
+    <img src="images/kurv.png" width="50" height="50">
+    <table class="table">
+        <thead>
+        <th></th>
+        <th>Vare:</th>
+        <th>Antal:</th>
+        <th></th>
+        </thead>
+        <tbody id="kurvTabel">
+        <tr>
+            <td><img src="images/tuborg.png" height="640" width="205" class="kurv-img"></td>
+            <td>Tuborg</td>
+            <td>4</td>
+            <td>
+                <button id="removeKnap">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="images/sodavand.png" height="3933" width="1014" class="kurv-img"></td>
+            <td>Sodavand</td>
+            <td>4</td>
+            <td>
+                <button id="removeKnap">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="købKnap">Purchase</button>
+            </td>
+            <td></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/kiosk.js"></script>
+
+</body>
+</html>

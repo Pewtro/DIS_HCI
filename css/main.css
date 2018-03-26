@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(220,220,220,1); /* Black background with opacity */
+    background-color: rgba(220, 220, 220, 1); /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
 }
@@ -17,4 +17,8 @@
     max-width: 75%;
     margin-bottom: 20px;
     margin-left: 20%;
+}
+
+body {
+    background-image: url("baggrund.jpg");
 }
