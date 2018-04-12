@@ -45,26 +45,33 @@ const SDK = {
                         return callback(err);
                     }
                     //sets the users token which is returned by the server on successful login
-                    sessionStorage.setItem("User", JSON.parse(data.RFIDUser));
+                    sessionStorage.setItem("UserRFID", JSON.parse(data.RFIDUser));
                     callback(null, data);
                 });
         },
-        //lets the user logout through the use of the token in sessionStorage
-        logOut: (callback) => {
+        //loads the current user by getting their profile with the token in session storage
+        loadCurrentStudent: (callback) => {
             SDK.request({
-                method: "POST",
-                url: "/students/logout",
+                method: "GET",
+                url: "/login",
                 headers: {
-                    authorization: sessionStorage.getItem("Student"),
+                    authorization: sessionStorage.getItem("UserRFID"),
                 },
-            }, (err, data) => {
+            }, (err, student) => {
                 if (err) {
+                    console.log("error i loadCurrentUser");
                     return callback(err);
                 }
-                callback(null, data);
+                callback(null, student);
+                console.log(student);
+                //sets the found student as our student in sessionStorage
+                sessionStorage.setItem("currentUser", JSON.stringify(student));
+
             });
-            //removes both token and student from sessionStorage for safety
-            sessionStorage.removeItem("Student");
+        },
+        logOut: () => {
+            sessionStorage.clear();
+            window.location.href = "login.html";
         },
     },
 
@@ -75,7 +82,7 @@ const SDK = {
                 method: "POST",
                 url: "/kiosk",
                 headers: {
-                    authorization: sessionStorage.getItem("User"),
+                    authorization: sessionStorage.getItem("UserRFID"),
                 },
                 data: {
                     nameProduct: product,

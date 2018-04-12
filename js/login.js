@@ -20,8 +20,21 @@ $(document).ready(() => {
                     document.getElementById("error").innerHTML = "Server is acting up, contact an administrator";
                     //if no user is found when logging in despite email/pass is correct (implies server is acting up)
                 } else {
-                    //we logged in successfully, now go to kiosk
-                    window.location.href = "kiosk.html";
+                    SDK.Student.loadCurrentStudent((err, data) => {
+                        //this is merely a failsafe - should never happen
+                        if (err && err.xhr.status === 401) {
+                            $(".form-group").addClass("Client fail");
+                            document.getElementById("error").innerHTML = "Wrong username or password";
+                        } else if (err && err.xhr.status === 415) {
+                            console.log("unsupported media type error");
+                        } else if (err) {
+                            console.log("general error i loadCurrentUser from login.js");
+                            //we logged in successfully, now go to kiosk
+                        } else {
+                            $("#rfidInput").val("");
+                            window.location.href = "kiosk.html";
+                        }
+                    });
                 }
             });
         }

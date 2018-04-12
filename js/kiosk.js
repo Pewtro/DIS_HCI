@@ -1,5 +1,15 @@
 $(document).ready(() => {
 
+    const welcomeHeader = $("#welcomeHeader");
+    const user = JSON.parse(sessionStorage.getItem("currentUser"));
+    welcomeHeader.append(user.nameUser);
+
+    if (user.userIsAdmin === 1) {
+        $("#buttons").append(`<button style="margin-right: 20px; margin-top: 5px" class="btn btn-primary pull-right"
+        id="adminButton">Admin
+            </button>`);
+    }
+
     function updateBasket(productName, productAmount) {
         let eksisterendeVare = false;
         const kurvTabel = $("#kurvTabel");
@@ -35,12 +45,10 @@ $(document).ready(() => {
 
     //lets the user logout
     $("#logoutButton").click(() => {
-        SDK.Student.logOut((err, data) => {
-            if (err && err.xhr.status === 401) {
-                $(".form-group").addClass("has-error");
-            }
-        });
-        window.location.href = "login.html";
+        SDK.Student.logOut();
+    });
+    $("#adminButton").click(() => {
+        window.location.href = "admin.html";
     });
 
     $("#købKnap").click(() => {
@@ -60,6 +68,7 @@ $(document).ready(() => {
             }
         }
     });
+
     const productsTable = $("#productsTable");
 
     SDK.Product.loadAllActiveProducts((callback, data) => {
