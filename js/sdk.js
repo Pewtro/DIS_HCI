@@ -74,7 +74,7 @@ const SDK = {
         },
     },
 
-    //Products
+//Products
     Product: {
         finalizePurchase: (product, amountBought, callback) => {
             SDK.request({
@@ -94,10 +94,39 @@ const SDK = {
                 callback(null, data);
             });
         },
-        loadAllActiveProducts: (callback) => {
+        loadAllActiveProducts:
+            (callback) => {
+                SDK.request({
+                    method: "GET",
+                    url: "/kiosk",
+                }, (err, data) => {
+                    if (err) {
+                        return callback(err);
+                    }
+                    callback(null, data);
+                });
+            },
+    },
+
+
+//Administrative functionality
+    Admin: {
+        loadEverythingBought:
+            (callback) => {
+                SDK.request({
+                    method: "GET",
+                    url: "/kiosk/admin/everythingBought",
+                }, (err, data) => {
+                    if (err) {
+                        return callback(err);
+                    }
+                    callback(null, data);
+                });
+            },
+        loadAllProducts: (callback) => {
             SDK.request({
                 method: "GET",
-                url: "/kiosk",
+                url: "/kiosk/admin/allProducts",
             }, (err, data) => {
                 if (err) {
                     return callback(err);
@@ -105,22 +134,17 @@ const SDK = {
                 callback(null, data);
             });
         },
-    },
-
-    //Administrative functionality
-    Admin: {
-        exportToExcel: () => {
-
+        loadAllUsers: (callback) => {
+            SDK.request({
+                    method: "GET",
+                    url: "/admin/allUsers",
+                },
+                (err, data) => {
+                    if (err) {
+                        return callback(err);
+                    }
+                    callback(null, data);
+                });
         },
-        loadAllProducts: () => {
-
-        },
-        updateProduct: () => {
-
-        },
-        createNewProduct: () => {
-
-        },
-
     },
 };
