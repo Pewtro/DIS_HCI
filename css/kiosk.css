@@ -22,10 +22,11 @@
     border-radius: 25px;
 }
 
-#removeKnap {
+.kioskKnap {
     margin-top: 40px;
     background-color: #1b6d85;
     border-radius: 25px;
+    padding: 2px 12px;
 }
 
 #kioskVare {

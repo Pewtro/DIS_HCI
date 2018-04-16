@@ -63,7 +63,6 @@ const SDK = {
                     return callback(err);
                 }
                 callback(null, student);
-                console.log(student);
                 //sets the found student as our student in sessionStorage
                 sessionStorage.setItem("currentUser", JSON.stringify(student));
 

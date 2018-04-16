@@ -16,10 +16,9 @@ $(document).ready(() => {
         kurvTabel.find("tr").each(function () {
             const name = $(this).find("td:eq(1)").text();
             if (name === productName) {
-                let currentAmount = $(this).find("td:eq(2)").text();
-                let newAmount = Number(currentAmount) + 1;
-                $(this).find("td:eq(2)").text(newAmount);
+                $(this).find("td:eq(2)").text(productAmount);
                 eksisterendeVare = true;
+                document.getElementById(name).style.display = "table-row";
             }
         });
         if (!eksisterendeVare) {
@@ -27,23 +26,46 @@ $(document).ready(() => {
             nyVare += '<td><img src="images/' + productName + '.png" class="kurv-img"></td>';
             nyVare += '<td>' + productName + '</td>';
             nyVare += '<td>' + productAmount + '</td>';
-            nyVare += '<td><button class="remove-basket-button" id="removeKnap" data-id="' + productName + '">Remove</button></td>';
+            nyVare += '<td><button class="kioskKnap tilfoejEn" data-id="' + "tilfoej" + $(this).attr("data-id") + '">+</button></td>';
+            nyVare += '<td><button class="kioskKnap fjernEn" data-id="' + "fjern" + $(this).attr("data-id") + '"> - </button></td>';
             nyVare += '</tr>';
             kurvTabel.append(nyVare);
 
-            $(".remove-basket-button").on('click', function () {
+            $(".tilfoejEn").on('click', function () {
                 const name = $(this).closest('tr').find('td:eq(1)').text();
                 if (name === productName) {
                     for (let i = 0; i < 1; i++) {
-                        sessionStorage.removeItem(name);
-                        $(this).closest("tr").remove();
+                        let amount = Number(sessionStorage.getItem(name));
+                        amount += 1;
+                        sessionStorage.setItem(name, amount);
+                        updateBasket(name, amount);
                     }
                 }
-            })
+            });
+
+            $(".fjernEn").on('click', function () {
+                const name = $(this).closest('tr').find('td:eq(1)').text();
+                if (name === productName) {
+                    for (let i = 0; i < 1; i++) {
+                        let amount = sessionStorage.getItem(name);
+                        amount -= 1;
+                        console.log(amount);
+                        if (amount === 0) {
+                            document.getElementById(name).style.display = "none";
+                            sessionStorage.removeItem(name);
+                        } else {
+                            sessionStorage.setItem(name, amount);
+                            updateBasket(name, amount);
+                        }
+
+                    }
+                }
+            });
+
         }
     }
 
-    //lets the user logout
+//lets the user logout
     $("#logoutButton").click(() => {
         SDK.Student.logOut();
     });
@@ -53,20 +75,19 @@ $(document).ready(() => {
 
     $("#købKnap").click(() => {
         for (let i = 0; i < sessionStorage.length; i++) {
-            if (sessionStorage.key(i) !== 'User') {
-                const productName = sessionStorage.key(i);
+            const productName = sessionStorage.key(i);
+            if (productName !== 'UserRFID' && productName !== 'currentUser') {
                 const amountBought = sessionStorage.getItem(productName);
                 SDK.Product.finalizePurchase(productName, amountBought, (err, data) => {
                     if (err && err.xhr.status === 401) {
                         throw err;
                     } else {
-                        console.log("buy success");
-                        sessionStorage.removeItem(productName);
                         $('#kurvTabel').empty();
                     }
                 });
             }
         }
+        window.location.href = "kvittering.html";
     });
 
     const productsTable = $("#productsTable");
@@ -84,6 +105,7 @@ $(document).ready(() => {
             i++;
             productsTable.append(newProduct);
         });
+
         $("#productsTable").find("div").on('click', function () {
             let name = $(this).find('input').attr("alt");
             //runs through all products until we find the clicked product
