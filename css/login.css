@@ -6,9 +6,10 @@
 .loginScreenFooter {
     top: 90%;
     position: fixed;
-    left: 80%;
+    left: 40%;
+    opacity: 0.6;
 }
 
-.rfidIdHidden {
-    display: none;
+#rfidInput:focus {
+    outline-width: 0;
 }

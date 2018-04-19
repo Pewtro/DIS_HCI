@@ -125,15 +125,34 @@ $(document).ready(() => {
                 }
             }
         }
+
+        //possibility to showcase the data to check if necessary
         showcaseData && console.log(data);
+
+        //utilize alasql to download a XLSX file
         alasql('SELECT * INTO XLSX("kiosk_udtræk.xlsx",{headers:true}) FROM ? ', [data]);
 
     });
-//lets the user logout
+
+    //lets the user logout
     $("#logoutButton").click(() => {
         SDK.Student.logOut();
     });
+
+    //lets the admin go back to the kiosk and act as a regular user
     $("#kioskButton").click(() => {
         window.location.href = "kiosk.html";
+    });
+
+    /**
+     * These three buttons should open a modal that allows adding products, updating active products, and adding users.
+     */
+    $("#redigerProdukter").click(() => {
+    });
+    $("#tilfoejBruger").click(() => {
+    });
+    $("#tilfoejProdukt").click(() => {
+        //Look at this if you need to upload files for the individual product
+        //https://stackoverflow.com/questions/3509333/how-to-upload-save-files-with-desired-name
     });
 });
