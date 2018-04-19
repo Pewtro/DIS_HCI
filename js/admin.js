@@ -3,6 +3,7 @@ $(document).ready(() => {
     const debugLoad = false;
     const debugExcel = false;
     const debugPrice = false;
+    const showcaseData = false;
 
     const welcomeHeader = $("#welcomeHeader");
     const user = JSON.parse(sessionStorage.getItem("currentUser"));
@@ -76,12 +77,16 @@ $(document).ready(() => {
 
         let data = [];
         let listeTilSletning = [];
+
+        //create an empty field
         data.push({name: '', RFID: '', 'Total price': ''});
 
+        //creates headers each individual product with empty fields, to ensure they're all added into the excel export
         for (let i = 0; i < alleProdukter.length; i++) {
             data[0][alleProdukter[i].nameProduct] = '';
         }
 
+        //for each user add all their bought products together in the json format required for alasql
         for (let i = 0; i < alleBrugere.length; i++) {
             const userRFID = alleBrugere[i].RFIDUser;
             const userName = alleBrugere[i].nameUser;
@@ -112,22 +117,17 @@ $(document).ready(() => {
                     }
 
                     listeTilSletning.unshift(i);
-                    /*if (i === altKoebt.length) {
+                    if (i === altKoebt.length) {
                         for (let i = 0; i < listeTilSletning.length; i++) {
                             altKoebt.splice(i, 1);
                         }
-                    }*/
+                    }
                 }
             }
         }
-
+        showcaseData && console.log(data);
         alasql('SELECT * INTO XLSX("kiosk_udtræk.xlsx",{headers:true}) FROM ? ', [data]);
 
-        /** Example data to showcase alasql functionality
-         let oldData = [{city: "Minsk", population: 100000}, {city: "Riga", population: 200000}];
-         console.log(oldData);
-         alasql('SELECT * INTO XLSX("cities.xlsx",{headers:true}) FROM ? ', [oldData]);
-         */
     });
 //lets the user logout
     $("#logoutButton").click(() => {
