@@ -45,6 +45,7 @@ const SDK = {
                         return callback(err);
                     }
                     //sets the users token which is returned by the server on successful login
+                    data.RFIDUser = "\"" + data.RFIDUser + "\"";
                     sessionStorage.setItem("UserRFID", JSON.parse(data.RFIDUser));
                     callback(null, data);
                 });

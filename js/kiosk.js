@@ -23,11 +23,11 @@ $(document).ready(() => {
         });
         if (!eksisterendeVare) {
             let nyVare = '<tr id="' + productName + '">';
-            nyVare += '<td><img src="images/' + productName + '.png" class="kurv-img"></td>';
-            nyVare += '<td>' + productName + '</td>';
-            nyVare += '<td>' + productAmount + '</td>';
-            nyVare += '<td><button class="kioskKnap tilfoejEn" data-id="' + "tilfoej" + $(this).attr("data-id") + '">+</button></td>';
-            nyVare += '<td><button class="kioskKnap fjernEn" data-id="' + "fjern" + $(this).attr("data-id") + '"> - </button></td>';
+            nyVare += '<td><img src="images/products/' + productName + '.png" class="kurv-img"></td>';
+            nyVare += '<td style="vertical-align: middle">' + productName + '</td>';
+            nyVare += '<td style="vertical-align: middle">' + productAmount + '</td>';
+            nyVare += '<td style="vertical-align: middle"><button class="kioskKnap tilfoejEn" data-id="' + "tilfoej" + $(this).attr("data-id") + '">+</button></td>';
+            nyVare += '<td style="vertical-align: middle"><button class="kioskKnap fjernEn" data-id="' + "fjern" + $(this).attr("data-id") + '"> - </button></td>';
             nyVare += '</tr>';
             kurvTabel.append(nyVare);
 
@@ -49,7 +49,6 @@ $(document).ready(() => {
                     for (let i = 0; i < 1; i++) {
                         let amount = sessionStorage.getItem(name);
                         amount -= 1;
-                        console.log(amount);
                         if (amount === 0) {
                             document.getElementById(name).style.display = "none";
                             sessionStorage.removeItem(name);
@@ -100,7 +99,7 @@ $(document).ready(() => {
 
         $.each(products, function (i, callback) {
             let newProduct = '<div class="col-md-4">';
-            newProduct += '<input type="image" id="kioskVare" data-id="' + (i + 1) + '" alt="' + products[i].nameProduct + '" width="40" height="100" src="images/' + products[i].nameProduct + '.png">';
+            newProduct += '<input type="image" id="kioskVare" data-id="' + (i + 1) + '" alt="' + products[i].nameProduct + '" width="40" height="100" src="images/products/' + products[i].nameProduct + '.png">';
             newProduct += '</div>';
             i++;
             productsTable.append(newProduct);

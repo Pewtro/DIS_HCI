@@ -70,6 +70,7 @@ $(document).ready(() => {
     $("#exportExcel").click(() => {
 
         let data = [];
+        let listeTilSletning = [];
 
         for (let i = 0; i < aktiveBrugere.length; i++) {
             const userRFID = aktiveBrugere[i].RFIDUser;
@@ -77,7 +78,7 @@ $(document).ready(() => {
             let existing = data.find(user => user.name === userName);
             let index = data.indexOf(existing);
             if (index === -1) {
-                debugExcel && console.log("creating new user entry");
+                debugExcel && console.log("creating new user entry for ", userName, " with RFID ", userRFID);
                 data.push({name: userName, RFID: userRFID});
                 existing = data.find(user => user.name === userName);
                 index = data.indexOf(existing);
@@ -87,22 +88,28 @@ $(document).ready(() => {
                     const nameProduct = altKoebt[i].nameProduct;
                     const amountBought = altKoebt[i].amountBought;
                     if (!data[index][nameProduct]) {
-                        debugExcel && console.log("creating new product entry");
+                        debugExcel && console.log("creating new product entry for ", nameProduct, " for user named: ", userName);
                         data[index][nameProduct] = amountBought;
                     } else {
                         data[index][nameProduct] += amountBought;
                     }
+                    listeTilSletning.unshift(i);
+                    if (i === altKoebt.length) {
+                        for (let i = 0; i < listeTilSletning.length; i++) {
+                            altKoebt.splice(i, 1);
+                        }
+                    }
                 }
             }
-
-            alasql('SELECT * INTO XLSX("kiosk_udtræk.xlsx",{headers:true}) FROM ? ', [data]);
-
-            /** Example data to showcase alasql functionality
-             let oldData = [{city: "Minsk", population: 100000}, {city: "Riga", population: 200000}];
-             console.log(oldData);
-             alasql('SELECT * INTO XLSX("cities.xlsx",{headers:true}) FROM ? ', [oldData]);
-             */
         }
+
+        alasql('SELECT * INTO XLSX("kiosk_udtræk.xlsx",{headers:true}) FROM ? ', [data]);
+
+        /** Example data to showcase alasql functionality
+         let oldData = [{city: "Minsk", population: 100000}, {city: "Riga", population: 200000}];
+         console.log(oldData);
+         alasql('SELECT * INTO XLSX("cities.xlsx",{headers:true}) FROM ? ', [oldData]);
+         */
     });
 //lets the user logout
     $("#logoutButton").click(() => {
