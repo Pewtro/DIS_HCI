@@ -23,7 +23,7 @@ $(document).ready(() => {
         });
         if (!eksisterendeVare) {
             let nyVare = '<tr id="' + productName + '">';
-            nyVare += '<td><img src="images/products/' + productName + '.png" class="kurv-img"></td>';
+            nyVare += '<td><img src="images/products/' + productName + '.png" alt="' + productName + '" class="kurv-img"></td>';
             nyVare += '<td style="vertical-align: middle">' + productName + '</td>';
             nyVare += '<td style="vertical-align: middle">' + productAmount + '</td>';
             nyVare += '<td style="vertical-align: middle"><button class="kioskKnap tilfoejEn" data-id="' + "tilfoej" + $(this).attr("data-id") + '">+</button></td>';
