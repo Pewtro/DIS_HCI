@@ -99,7 +99,7 @@ $(document).ready(() => {
 
         $.each(products, function (i, callback) {
             let newProduct = '<div class="col-md-4">';
-            newProduct += '<input type="image" id="kioskVare" data-id="' + (i + 1) + '" alt="' + products[i].nameProduct + '" width="40" height="100" src="images/products/' + products[i].nameProduct + '.png">';
+            newProduct += '<input type="image" id="kioskVare" data-id="' + (i + 1) + '" alt="' + products[i].nameProduct + '" width="80" height="200" src="images/products/' + products[i].nameProduct + '.png">';
             newProduct += '</div>';
             i++;
             productsTable.append(newProduct);

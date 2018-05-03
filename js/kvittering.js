@@ -28,7 +28,7 @@ $(document).ready(() => {
     setInterval(function () {
         timer -= 1000;
         debug && console.log('Time left: ' + timer / 1000 + 's');
-        $("#automatiskLogud").text('Logged out in ' + timer / 1000 + 's');
+        $("#automatiskLogud").text('Automatisk log ud om ' + timer / 1000 + 's');
     }, 1000);
 
 //lets the user logout instantly

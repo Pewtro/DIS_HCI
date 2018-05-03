@@ -154,5 +154,8 @@ $(document).ready(() => {
     $("#tilfoejProdukt").click(() => {
         //Look at this if you need to upload files for the individual product
         //https://stackoverflow.com/questions/3509333/how-to-upload-save-files-with-desired-name
+
+        //filesaver.js
+        //https://github.com/eligrey/FileSaver.js
     });
 });
