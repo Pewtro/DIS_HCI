@@ -1,6 +1,4 @@
-const debug = true;
-
-const encryption = false;
+const debug = false;
 
 const SDK = {
     serverURL: "http://localhost:8080/api",
@@ -73,6 +71,55 @@ const SDK = {
             sessionStorage.clear();
             window.location.href = "login.html";
         },
+        createUser: (name, RFID, Sex, Admin, callback) => {
+            SDK.request({
+                url: "/admin/addUser",
+                method: "POST",
+                data: {
+                    nameUser: name,
+                    RFIDUser: RFID,
+                    userSex: Sex,
+                    userIsAdmin: Admin,
+                }
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
+        updateUser: (idUser, nameUser, RFIDUser, userIsAdmin, userSex, callback) => {
+            SDK.request({
+                method: "PUT",
+                data: {
+                    idUser: idUser,
+                    nameUser: nameUser,
+                    RFIDUser: RFIDUser,
+                    userIsAdmin: userIsAdmin,
+                    userSex: userSex,
+                },
+                url: "/admin/" + idUser + "/update-user",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
+        deleteUser: (idUser, callback) => {
+            SDK.request({
+                method: "DELETE",
+                data: {
+                    idUser: idUser,
+                },
+                url: "/admin/" + idUser + "/delete-user",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
     },
 
 //Products
@@ -95,20 +142,83 @@ const SDK = {
                 callback(null, data);
             });
         },
-        loadAllActiveProducts:
-            (callback) => {
-                SDK.request({
-                    method: "GET",
-                    url: "/kiosk",
-                }, (err, data) => {
-                    if (err) {
-                        return callback(err);
-                    }
-                    callback(null, data);
-                });
-            },
+        loadAllActiveProducts: (callback) => {
+            SDK.request({
+                method: "GET",
+                url: "/kiosk",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+                sessionStorage.setItem("activeProducts", JSON.stringify(data));
+            });
+        },
+        createProduct: (productName, productPrice, productStock, productIsActive, callback) => {
+            SDK.request({
+                url: "/kiosk/admin/createProduct",
+                method: "POST",
+                data: {
+                    nameProduct: productName,
+                    priceProduct: productPrice,
+                    stockProduct: productStock,
+                    isActive: productIsActive,
+                }
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
+        updateProduct: (productID, productName, productPrice, productStock, productIsActive, callback) => {
+            SDK.request({
+                method: "PUT",
+                data: {
+                    idProduct: productID,
+                    nameProduct: productName,
+                    priceProduct: productPrice,
+                    stockProduct: productStock,
+                    isActive: productIsActive,
+                },
+                url: "/kiosk/admin/" + productID + "/update-product",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
+        deleteProduct: (idProduct, callback) => {
+            SDK.request({
+                method: "DELETE",
+                data: {
+                    idProduct: idProduct,
+                },
+                url: "/kiosk/admin/" + idProduct + "/delete-product",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
+        refillProduct: (idProduct, stockIncrease, callback) => {
+            SDK.request({
+                method: "PUT",
+                data: {
+                    idProduct: idProduct,
+                    stockProduct: stockIncrease,
+                },
+                url: "/kiosk/admin/" + idProduct + "/refill",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
+        },
     },
-
 
 //Administrative functionality
     Admin: {
@@ -146,6 +256,17 @@ const SDK = {
                     }
                     callback(null, data);
                 });
+        },
+        sletArrangementData: (callback) => {
+            SDK.request({
+                method: "DELETE",
+                url: "/kiosk/admin/delete-arrangement-data",
+            }, (err, data) => {
+                if (err) {
+                    return callback(err);
+                }
+                callback(null, data);
+            });
         },
     },
 };

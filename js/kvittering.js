@@ -5,7 +5,7 @@ $(document).ready(() => {
     for (let i = 0; i < sessionStorage.length; i++) {
         debug && console.log(sessionStorage.key(i));
         const productName = sessionStorage.key(i);
-        if (productName !== 'UserRFID' && productName !== 'currentUser') {
+        if (productName !== 'UserRFID' && productName !== 'currentUser' && productName !== 'activeProducts') {
             const amountBought = sessionStorage.getItem(productName);
             $("#kvittering").append('<br/>' +
                 amountBought + 'x ' + productName);
