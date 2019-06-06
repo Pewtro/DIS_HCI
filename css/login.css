@@ -14,10 +14,20 @@
     outline-width: 0;
 }
 
+/* Only used during testing
+#rfidInput, #loginBtn{
+    background-color: black;
+}*/
+
+/* Used during production
 #rfidInput {
     color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
     border: 0;
+}*/
+
+#rfidInput {
+    color: black;
 }
 
 #loginBtn {

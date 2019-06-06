@@ -167,6 +167,7 @@ $(document).ready(() => {
         }
         $("#hentDoekDataAdvarsel").hide();
         const doekDataTable = $("#hentDoekDataTable");
+        $("#hentDoekDataTable tr").remove();
         doekDataTable.append('' +
             '<thead class="text-center"><tr>' +
             '<th>Armbånd #</th>' +

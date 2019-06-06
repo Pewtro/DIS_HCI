@@ -44,7 +44,9 @@ const SDK = {
                     }
                     //sets the users token which is returned by the server on successful login
                     data.RFIDUser = "\"" + data.RFIDUser + "\"";
+                    console.log(data.RFIDUser);
                     sessionStorage.setItem("UserRFID", JSON.parse(data.RFIDUser));
+                    console.log(sessionStorage.getItem("UserRFID"));
                     callback(null, data);
                 });
         },
@@ -61,6 +63,7 @@ const SDK = {
                     console.log("error i loadCurrentUser");
                     return callback(err);
                 }
+                console.log(sessionStorage.getItem("UserRFID"));
                 callback(null, student);
                 //sets the found student as our student in sessionStorage
                 sessionStorage.setItem("currentUser", JSON.stringify(student));
